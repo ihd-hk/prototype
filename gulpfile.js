@@ -2,6 +2,8 @@
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const ghPages = require('gulp-gh-pages');
+const debug = require('gulp-debug');
+
 
 const browserSync = require('browser-sync');
 const del = require('del');
@@ -12,6 +14,7 @@ const reload = browserSync.reload;
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
+    .pipe(debug({title: 'debug-styles'}))
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass.sync({
@@ -27,6 +30,7 @@ gulp.task('styles', () => {
 
 gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
+    .pipe(debug({title: 'debug-scripts'}))
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -46,7 +50,7 @@ function lint(files, options) {
 gulp.task('lint', () => {
   return lint('app/scripts/**/*.js', {
     fix: true
-  })
+  }).pipe(debug({title: 'debug-lint'}))
     .pipe(gulp.dest('app/scripts'));
 });
 gulp.task('lint:test', () => {
@@ -61,6 +65,7 @@ gulp.task('lint:test', () => {
 
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')
+    .pipe(debug({title: 'debug-html'}))
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
@@ -70,6 +75,7 @@ gulp.task('html', ['styles', 'scripts'], () => {
 
 gulp.task('images', () => {
   return gulp.src('app/images/**/*')
+    .pipe(debug({title: 'debug-images'}))
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
@@ -83,6 +89,7 @@ gulp.task('images', () => {
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
+    .pipe(debug({title: 'debug-fonts'}))
     .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
 });
@@ -93,7 +100,9 @@ gulp.task('extras', () => {
     '!app/*.html'
   ], {
     dot: true
-  }).pipe(gulp.dest('dist'));
+  })
+  .pipe(debug({title: 'debug-extras'}))
+  .pipe(gulp.dest('dist'));
 });
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
@@ -168,10 +177,10 @@ gulp.task('wiredep', () => {
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+  return gulp.src('dist/**/*').pipe($.size({title: 'build'}));
 });
 
-gulp.task('deploy', function() {
+gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
 });
