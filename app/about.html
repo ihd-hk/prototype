@@ -16,8 +16,7 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-<!--     <link rel="stylesheet" href="/bower_components/bootsketch/build/css/bootsketch.css">
- -->    <!-- endbuild -->
+    <!-- endbuild -->
 
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
@@ -29,21 +28,13 @@
     <![endif]-->
 
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="index.html">Home</a></li>
-          <li class="active"><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="team.html">Team Members</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">ihD</h3>
-      </div>
+      <!-- @include includes/_header.html -->
+
 
       <div class="row marketing">
         <div class="col-md-12">
           <h1>About</h1>
+
           <p>ihD Ltd is a Hong Kong-registered Private Limited Company, specialising in ELV, Audio-Visual, Acoustics, IT, Security, PBX System Design and Consultancy. Our company is not involved in any way in the supply of equipment nor in installation. We focus instead on Design, Consultancy, and Project Management, allowing us to remain independant, specifying equipment and systems most suited to our clients technical and budgetary needs.</p>
 
           <p>We are proud of our reputation for excellence in both our design and our project handling. Although we do not supply or install, our Team members have long years of hands-on experience with project management, making us uniquely able to assess and aid the progress and workmanship of the Integrators appointed, ensuring a successful completion every time.</p>
@@ -52,22 +43,9 @@
         </div>
       </div>
 
-      <div class="footer">
-        <p>Footer Goes Here</p>
-      </div>
+      <!-- @include includes/_footer.html -->
     </div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <!--
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-    -->
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->

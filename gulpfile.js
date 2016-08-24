@@ -11,6 +11,7 @@ const wiredep = require('wiredep').stream;
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
+debug($);
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
@@ -63,9 +64,18 @@ gulp.task('lint:test', () => {
     .pipe(gulp.dest('test/spec/**/*.js'));
 });
 
-gulp.task('html', ['styles', 'scripts'], () => {
+gulp.task('preprocess', () => {
+  return gulp.src('app/*.html')
+          .pipe($.preprocess())
+          .pipe(gulp.dest('.tmp/'))
+          .pipe(reload({stream: true}));
+
+});
+
+gulp.task('html', ['preprocess', 'styles', 'scripts'], () => {
   return gulp.src('app/*.html')
     .pipe(debug({title: 'debug-html'}))
+    .pipe($.preprocess())
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
@@ -107,7 +117,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['preprocess', 'styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -121,9 +131,10 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
 
   gulp.watch([
     'app/*.html',
+    'app/includes/*/html',
     'app/images/**/*',
     '.tmp/fonts/**/*'
-  ]).on('change', reload);
+  ], ['preprocess']).on('change', reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);

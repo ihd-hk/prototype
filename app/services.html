@@ -16,8 +16,7 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-<!--     <link rel="stylesheet" href="/bower_components/bootsketch/build/css/bootsketch.css">
- -->    <!-- endbuild -->
+    <!-- endbuild -->
 
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
@@ -29,21 +28,12 @@
     <![endif]-->
 
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li class="active"><a href="services.html">Services</a></li>
-          <li><a href="team.html">Team Members</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">ihD</h3>
-      </div>
+      <!-- @include includes/_header.html -->
 
       <div class="row">
         <div class="col-md-12">
           <h1>Services</h1>
+
           <h2>Scope of services provided</h2>
           <p>ihD provides essential and timely professional consultancy services to the Audio-Visual, ELV, IT/PABX, Security, and Architectural/Mechanical Acoustics Industries, offering a full design-service through to Tender, Project Implementation checking, T&amp;C, and troubleshooting/commissioning in the following disciplines, sometimes just one, other times a mix, and yet for other projects, all disciplines :</p>
           <ul>
@@ -69,22 +59,9 @@
         </div>
       </div>
 
-      <div class="footer">
-        <p>Footer Goes Here</p>
-      </div>
+      <!-- @include includes/_footer.html -->
     </div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <!--
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-    -->
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
