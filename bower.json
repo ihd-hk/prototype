@@ -4,7 +4,9 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
-    "bootsketch": "^1.0.1"
+    "bootsketch": "^1.0.1",
+    "list.js": "listjs#^1.2.0",
+    "handlebars": "^4.0.5"
   },
   "overrides": {
     "bootstrap-sass": {

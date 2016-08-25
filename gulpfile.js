@@ -64,6 +64,19 @@ gulp.task('lint:test', () => {
     .pipe(gulp.dest('test/spec/**/*.js'));
 });
 
+gulp.task('templates', () => {
+  return gulp.src('app/templates/**/*.hbs')
+    .pipe($.handlebars({
+      handlebars: require('handlebars')
+    }))
+    .pipe($.defineModule('plain'))
+    .pipe($.declare({
+      namespace: 'IHD.templates',
+      noRedeclare: true
+    }))
+    .pipe(gulp.dest('.tmp/templates'));
+});
+
 gulp.task('preprocess', () => {
   return gulp.src('app/*.html')
           .pipe($.preprocess())
@@ -72,7 +85,7 @@ gulp.task('preprocess', () => {
 
 });
 
-gulp.task('html', ['preprocess', 'styles', 'scripts'], () => {
+gulp.task('html', ['preprocess', 'templates', 'styles', 'scripts'], () => {
   return gulp.src('app/*.html')
     .pipe(debug({title: 'debug-html'}))
     .pipe($.preprocess())
@@ -117,7 +130,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['preprocess', 'styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
