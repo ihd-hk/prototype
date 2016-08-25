@@ -77,9 +77,9 @@ gulp.task('html', ['preprocess', 'styles', 'scripts'], () => {
     .pipe(debug({title: 'debug-html'}))
     .pipe($.preprocess())
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
-    .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
+    // .pipe($.if('*.js', $.uglify()))
+    // .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
+    // .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
 });
 
