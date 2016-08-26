@@ -34,8 +34,11 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Portfolio</h1>
+          <div id="location_filter">
+            <ul class="nav nav-pills"></ul>
+          </div>
 
-          <div id="porfolio_grid">
+          <div id="porfolio_grid" data-grid>
           </div>
         </div>
       </div>
@@ -49,6 +52,8 @@
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/list.js/dist/list.js"></script>
     <script src="/bower_components/handlebars/handlebars.js"></script>
+    <script src="/bower_components/ev-emitter/ev-emitter.js"></script>
+    <script src="/bower_components/imagesloaded/imagesloaded.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -74,6 +79,7 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
+    <script src="/bower_components/bricks.js/dist/bricks.min.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/portfolio.js"></script>
     <!-- endbuild -->

@@ -6,7 +6,9 @@
     "modernizr": "~2.8.1",
     "bootsketch": "^1.0.1",
     "list.js": "listjs#^1.2.0",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "bricks.js": "git@github.com:callmecavs/bricks.js.git#^1.7.0",
+    "imagesloaded": "^4.1.0"
   },
   "overrides": {
     "bootstrap-sass": {
