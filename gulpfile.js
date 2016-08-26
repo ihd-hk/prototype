@@ -66,6 +66,7 @@ gulp.task('lint:test', () => {
 
 gulp.task('templates', () => {
   return gulp.src('app/templates/**/*.hbs')
+    .pipe(debug({title: 'debug-templates'}))
     .pipe($.handlebars({
       handlebars: require('handlebars')
     }))
@@ -79,6 +80,7 @@ gulp.task('templates', () => {
 
 gulp.task('preprocess', () => {
   return gulp.src('app/*.html')
+          .pipe(debug({title: 'debug-preprocess'}))
           .pipe($.preprocess())
           .pipe(gulp.dest('.tmp/'))
           .pipe(reload({stream: true}));
