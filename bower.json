@@ -5,10 +5,9 @@
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
     "bootsketch": "^1.0.1",
-    "list.js": "listjs#^1.2.0",
     "handlebars": "^4.0.5",
-    "bricks.js": "git@github.com:callmecavs/bricks.js.git#^1.7.0",
-    "imagesloaded": "^4.1.0"
+    "imagesloaded": "^4.1.0",
+    "masonry": "^4.1.1"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -16,6 +15,17 @@
         "assets/stylesheets/_bootstrap.scss",
         "assets/fonts/bootstrap/*",
         "assets/javascripts/bootstrap.js"
+      ]
+    },
+    "outlayer": {
+      "main": [
+        "item.js",
+        "outlayer.js"
+      ]
+    },
+    "masonry": {
+      "main": [
+        "dist/masonry.pkgd.js"
       ]
     }
   },

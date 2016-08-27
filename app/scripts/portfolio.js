@@ -485,7 +485,7 @@ var portfolio_items = [
 ];
 
 
-(function ($) {
+(function ($, Masonry) {
   'use strict';
   var $list = $('#porfolio_grid'),
     $locationFilter = $('#location_filter ul');
@@ -511,29 +511,50 @@ var portfolio_items = [
       }
     });
   });
-  console.log(locations);
 
 
-  var sizes = [
-    { columns: 2, gutter: 10 },
-    { mq: '768px', columns: 3, gutter: 10 },
-    { mq: '1024px', columns: 4, gutter: 10 }
-  ];
 
-  var bricksInstance = Bricks({
-    container: '#porfolio_grid',
-    packed: 'data-packed',
-    sizes: sizes,
-  });
   var $images = $list.find('img');
   var imgLoad = new imagesLoaded($images.get()); //eslint-disable-line new-cap
   imgLoad.on('always', function () {
-    bricksInstance.pack();
+    $list.masonry({
+      itemSelector: '.portfolio-item'
+    });
+    $list.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function( event, laidOutItems ) {
+      // console.log(event);
+      $list.masonry();
+    });
   });
 
 
+  var updateFilter = function(selectedLocation) {
+    var allElements = $list.masonry('getItemElements'), elementsToHide = [], elementsToShow = [];
+
+    $.each(allElements, function(i,el) {
+      var $el = $(el);
+
+      if ($el.data('locations') == selectedLocation) {
+        if ($el.is(':hidden')) {
+          elementsToShow.push(el);
+        }
+      }
+      else {
+        if ($el.is(':visible')) {
+          elementsToHide.push(el);
+        }
+      }
+    });
+    console.log({hide: elementsToHide.length, show: elementsToShow.length, all: allElements.length});
+
+    $list.masonry('hideItemElements', elementsToHide).masonry('revealItemElements', elementsToShow);
+  };
+
+
   $locationFilter.on('click', 'a', function(event) {
-    $(event.currentTarget).parent('li').toggleClass('active');
+    var $clickedLink = $(event.currentTarget);
+    $clickedLink.parent('li').toggleClass('active').siblings('li').removeClass('active');
+
+    updateFilter($clickedLink.data('location'));
   });
 
 
@@ -569,4 +590,4 @@ var portfolio_items = [
   // });
   // $locationSelect.on('change', filterList);
   // $locationSelect.chosen();
-})(jQuery);
+})(jQuery, Masonry);
