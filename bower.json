@@ -7,7 +7,8 @@
     "bootsketch": "^1.0.1",
     "handlebars": "^4.0.5",
     "imagesloaded": "^4.1.0",
-    "masonry": "^4.1.1"
+    "masonry": "^4.1.1",
+    "shufflejs": "^4.0.1"
   },
   "overrides": {
     "bootstrap-sass": {

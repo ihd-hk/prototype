@@ -485,109 +485,59 @@ var portfolio_items = [
 ];
 
 
-(function ($, Masonry) {
+(function ($, Shuffle) {
   'use strict';
   var $list = $('#porfolio_grid'),
     $locationFilter = $('#location_filter ul');
-    // $characterSelect = $('#character'),
 
   var locations = [];
 
 
   $.each(portfolio_items, function (i, portfolio) {
-    // book.serializedCharacters = JSON.stringify(this.characters);
-    // book.serializedLocations = JSON.stringify(this.locations);
-
     $list.append(IHD.templates.portfolio(portfolio));
-    // $.each(book.characters, function (index, character) {
-    //   if (characters.indexOf(character) === -1) {
-    //     characters.push(character);
-    //   }
-    // });
+
     $.each(portfolio.locations, function (index, location) {
       if (locations.indexOf(location) === -1) {
         locations.push(location);
-        $locationFilter.append('<li><a data-location="' + location + '">' + location + '</a></li>');
+        $locationFilter.append('<li data-location="' + location + '"><a>' + location + '</a></li>');
       }
     });
   });
 
 
 
+  var shuffle;
   var $images = $list.find('img');
   var imgLoad = new imagesLoaded($images.get()); //eslint-disable-line new-cap
   imgLoad.on('always', function () {
-    $list.masonry({
+    shuffle = new Shuffle($list[0], {
       itemSelector: '.portfolio-item'
-    });
-    $list.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function( event, laidOutItems ) {
-      // console.log(event);
-      $list.masonry();
     });
   });
 
 
-  var updateFilter = function(selectedLocation) {
-    var allElements = $list.masonry('getItemElements'), elementsToHide = [], elementsToShow = [];
-
-    $.each(allElements, function(i,el) {
-      var $el = $(el);
-
-      if ($el.data('locations') == selectedLocation) {
-        if ($el.is(':hidden')) {
-          elementsToShow.push(el);
-        }
-      }
-      else {
-        if ($el.is(':visible')) {
-          elementsToHide.push(el);
-        }
-      }
+  var updateFilter = function() {
+    var locations = [];
+    $locationFilter.find('li.active').each(function(i, el) {
+      locations.push(el.getAttribute('data-location'));
     });
-    console.log({hide: elementsToHide.length, show: elementsToShow.length, all: allElements.length});
 
-    $list.masonry('hideItemElements', elementsToHide).masonry('revealItemElements', elementsToShow);
+    if (locations.length > 0) {
+      shuffle.filter(function(element) {
+        return locations.indexOf(element.getAttribute('data-locations')) !== -1;
+      });
+    }
+    else {
+      shuffle.filter(Shuffle.ALL_ITEMS);
+    }
   };
 
 
   $locationFilter.on('click', 'a', function(event) {
     var $clickedLink = $(event.currentTarget);
-    $clickedLink.parent('li').toggleClass('active').siblings('li').removeClass('active');
+    var $parentLi = $clickedLink.parent('li');
+    $parentLi.toggleClass('active'); //.siblings('li').removeClass('active');
 
-    updateFilter($clickedLink.data('location'));
+    updateFilter();
   });
-
-
-  // var filterList = function () {
-  //   var selectedCharacters = $characterSelect.val(),
-  //     selectedLocations = $locationSelect.val();
-  //   console.log([selectedCharacters, selectedLocations]);
-
-  //   $list.shuffle('shuffle', function ($el) {
-  //     return (selectedCharacters === null || _.intersection($el.data('characters'), selectedCharacters).length === selectedCharacters.length) &&
-  //            (selectedLocations === null || _.intersection($el.data('locations'), selectedLocations).length === selectedLocations.length);
-  //   });
-  // };
-
-
-  // characters.sort();
-  // $.each(characters, function (k, v) {
-  //   $characterSelect
-  //     .append($('<option></option>')
-  //       .attr('value', v)
-  //       .text(v));
-  // });
-  // $characterSelect.on('change', filterList);
-  // $characterSelect.chosen();
-
-
-  // locations.sort();
-  // $.each(locations, function (k, v) {
-  //   $locationSelect
-  //     .append($('<option></option>')
-  //       .attr('value', v)
-  //       .text(v));
-  // });
-  // $locationSelect.on('change', filterList);
-  // $locationSelect.chosen();
-})(jQuery, Masonry);
+})(jQuery, window.shuffle);
