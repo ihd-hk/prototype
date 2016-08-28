@@ -10,8 +10,12 @@ body {
 footer {
   background-color: $gray-darker;
 }
-.navbar-brand > img {
-  max-height: 25px;
+.navbar-brand {
+  padding: 5px;
+  line-height: 40px;
+  &> img {
+    max-height: 40px;
+  }
 }
 .navbar {
   background-color: rgba($navbar-default-bg, 0.95);
@@ -40,24 +44,32 @@ footer {
 #porfolio_grid {
   .portfolio-item {
     @extend .col-md-3;
+    @extend .col-xs-12;
+
     img {
       width: 100%;
     }
     h2 { font-size: $font-size-h4; }
     h3 { font-size: $font-size-h5; }
+    p, {
+      display: none;
+    }
     h2, h3 {
       text-align: center;
       font-weight: normal;
     }
 
-    .inner {
-      background: $gray-lighter;
-      padding: $grid-gutter-width/2;
-      $quarter-grid-gutter-width: ($grid-gutter-width/4);
-      margin-top: $quarter-grid-gutter-width;
-      margin-bottom: $quarter-grid-gutter-width;
-      margin-left: -$quarter-grid-gutter-width;
-      margin-right: -$quarter-grid-gutter-width;
+    @media (min-width: $screen-md-min) {
+      p { display: block; }
+      .inner {
+        background: $gray-lighter;
+        padding: $grid-gutter-width/2;
+        $quarter-grid-gutter-width: ($grid-gutter-width/4);
+        margin-top: $quarter-grid-gutter-width;
+        margin-bottom: $quarter-grid-gutter-width;
+        margin-left: -$quarter-grid-gutter-width;
+        margin-right: -$quarter-grid-gutter-width;
+      }
     }
   }
 }
