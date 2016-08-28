@@ -146,7 +146,7 @@ gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], ()
 
   gulp.watch([
     'app/*.html',
-    'app/includes/*/html',
+    'app/includes/*.html',
     'app/images/**/*',
     '.tmp/fonts/**/*',
     '.tmp/templates/**/*.js'
