@@ -1,6 +1,6 @@
-$(function () {
-    setNavigation();
-});
+// $(function () {
+//     setNavigation();
+// });
 
 function setNavigation() {
     var path = window.location.pathname;
@@ -14,3 +14,9 @@ function setNavigation() {
         }
     });
 }
+
+
+(function($) {
+  setNavigation();
+  $('#carousel-homepage').carousel();
+})(jQuery);

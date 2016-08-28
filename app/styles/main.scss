@@ -3,8 +3,6 @@ $icon-font-path: '../fonts/';
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
-@import "bower_components/bootsketch/build/css/bootsketch";
-@import "bower_components/bootsketch/assets/sass/bootsketch-variables";
 
 body {
   padding-top: 70px;
@@ -13,10 +11,16 @@ body {
   max-height: 25px;
 }
 .header {
-  background-color: rgba($dust, 0.85);
-  border-color: rgba($silver, 0.85);
+  background-color: rgba($navbar-default-bg, 0.85);
+  border-color: rgba($navbar-default-border, 0.85);
 }
 
+.carousel-cover-image {
+  height: 400px;
+  width: 100%;
+  background-size: cover;
+  z-index: -1;
+}
 .profile-image {
   img {
     max-width: 100%;
