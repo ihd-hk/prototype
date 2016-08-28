@@ -4,7 +4,6 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
-    "bootsketch": "^1.0.1",
     "handlebars": "^4.0.5",
     "imagesloaded": "^4.1.0",
     "masonry": "^4.1.1",
