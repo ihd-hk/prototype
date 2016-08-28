@@ -7,12 +7,15 @@ $icon-font-path: '../fonts/';
 body {
   padding-top: 70px;
 }
+footer {
+  background-color: $gray-darker;
+}
 .navbar-brand > img {
   max-height: 25px;
 }
-.header {
-  background-color: rgba($navbar-default-bg, 0.85);
-  border-color: rgba($navbar-default-border, 0.85);
+.navbar {
+  background-color: rgba($navbar-default-bg, 0.95);
+  border-color: rgba($navbar-default-border, 0.95);
 }
 
 .carousel-cover-image {
@@ -37,10 +40,6 @@ body {
 #porfolio_grid {
   .portfolio-item {
     @extend .col-md-3;
-    // &:nth-child(4n+1) {
-    //   clear: left;
-    // }
-
     img {
       width: 100%;
     }
@@ -59,28 +58,6 @@ body {
       margin-bottom: $quarter-grid-gutter-width;
       margin-left: -$quarter-grid-gutter-width;
       margin-right: -$quarter-grid-gutter-width;
-    //   position: relative;
-
-    //   .info {
-    //     visibility: hidden;
-    //     position:absolute;
-    //     height: 100%;
-    //     width: 100%;
-    //     top: 0;
-    //     left: 0;
-    //     bottom: 0;
-    //     right: 0;
-    //     background: rgba(0,0,0, 0.5);
-    //     color: $gray-lighter;
-    //     p {
-    //       text-align: center;
-    //     }
-    //   }
-    //   &:hover {
-    //     .info {
-    //       visibility: visible;
-    //     }
-    //   }
     }
   }
 }
