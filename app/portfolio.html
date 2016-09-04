@@ -34,8 +34,11 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Portfolio</h1>
-          <div id="location_filter">
-            <ul class="nav nav-pills"></ul>
+          <div id="location_filter" class="portfolio-filter">
+            <ul class="nav nav-pills"><p class="navbar-text">Location:</p></ul>
+          </div>
+          <div id="type_filter" class="portfolio-filter">
+            <ul class="nav nav-pills"><p class="navbar-text">Type:</p></ul>
           </div>
 
           <div id="porfolio_grid">
@@ -59,6 +62,7 @@
     <script src="/bower_components/outlayer/outlayer.js"></script>
     <script src="/bower_components/masonry/dist/masonry.pkgd.js"></script>
     <script src="/bower_components/shufflejs/dist/shuffle.js"></script>
+    <script src="/bower_components/underscore/underscore.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -79,6 +83,8 @@
 
     <!-- build:js templates/foo.js -->
     <script src="templates/portfolio.js"></script>
+    <script src="templates/portfolio_filter_button.js"></script>
+    <script src="templates/type_filter_button.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->

@@ -7,8 +7,32 @@ $font-family-serif: 'Slabo 27px', Georgia, "Times New Roman", Times, serif;
 $font-family-base: $font-family-serif;
 $font-size-base: 16px;
 
+$brand-primary: rgb(255,90,1);
+
+// $navbar-default-link-color:                #777 !default;
+// $navbar-default-link-hover-color:          #333 !default;
+// $navbar-default-link-hover-bg:             rgba($brand-primary, 0.25);
+$navbar-default-link-hover-bg:             lighten($brand-primary, 33.333%);
+$navbar-default-link-active-color:         #f0f0f0;
+$navbar-default-link-active-bg:            $brand-primary;
+// $navbar-default-link-disabled-color:       #ccc !default;
+// $navbar-default-link-disabled-bg:          transparent !default;
+
+$navbar-default-bg: rgba(#f0f0f0, 0.95);
+$navbar-default-border: darken($navbar-default-bg, 6.5%);
+
+$nav-pills-border-radius: 0;
+
+
+// $tooltip-bg: rgba($brand-primary, 0.9);
+// $tooltip-bg: $gray-dark;
+// $tooltip-arrow-color: $tooltip-bg;
+// $tooltip-color: $gray-lighter;
+
+
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/flag-css/dist/scss/flag-css.scss";
 // endbower
 
 
@@ -39,10 +63,6 @@ footer {
     max-height: 40px;
   }
 }
-.navbar {
-  background-color: rgba($navbar-default-bg, 0.95);
-  border-color: rgba($navbar-default-border, 0.95);
-}
 
 .carousel-cover-image {
   height: 400px;
@@ -66,14 +86,15 @@ footer {
 #porfolio_grid {
   .portfolio-item {
     @extend .col-md-3;
-    @extend .col-xs-12;
+    @extend .col-sm-4;
+    @extend .col-xs-6;
 
     img {
       width: 100%;
     }
     h2 { font-size: $font-size-h4; }
     h3 { font-size: $font-size-h5; }
-    p, {
+    p {
       display: none;
     }
     h2, h3 {
@@ -81,16 +102,49 @@ footer {
       font-weight: normal;
     }
 
-    @media (min-width: $screen-md-min) {
+    .inner {
+      background: $gray-lighter;
+      padding: $grid-gutter-width/4;
+      $quarter-grid-gutter-width: ($grid-gutter-width/4);
+      margin-top: $quarter-grid-gutter-width;
+      margin-bottom: $quarter-grid-gutter-width;
+      margin-left: -$quarter-grid-gutter-width;
+      margin-right: -$quarter-grid-gutter-width;
+    }
+
+    @media (min-width: $screen-xs-max) {
       p { display: block; }
-      .inner {
-        background: $gray-lighter;
-        padding: $grid-gutter-width/2;
-        $quarter-grid-gutter-width: ($grid-gutter-width/4);
-        margin-top: $quarter-grid-gutter-width;
-        margin-bottom: $quarter-grid-gutter-width;
-        margin-left: -$quarter-grid-gutter-width;
-        margin-right: -$quarter-grid-gutter-width;
+    }
+  }
+}
+
+#location_filter {
+  li {
+    position: static;
+
+    a.flag {
+      @extend .flag-3x;
+      width: 4.5em;
+      margin-right: 0.5em;
+
+      // Hide the text
+      display: inline-block;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+
+      padding:0;
+      opacity: 0.5;
+      @include transition(opacity ease-in-out .15s);
+      &:hover {
+        opacity: 0.66;
+      }
+    }
+
+    &.active {
+      a.flag {
+        background-color: transparent;
+        opacity: 1;
       }
     }
   }

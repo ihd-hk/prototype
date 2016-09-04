@@ -111,6 +111,20 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
+gulp.task('flags', () => {
+  return gulp.src('bower_components/flag-css/dist/flags/**/*')
+    .pipe(debug({title: 'debug-flags'}))
+    // .pipe($.cache($.imagemin({
+    //   progressive: true,
+    //   interlaced: true,
+    //   // don't remove IDs from SVGs, they are often used
+    //   // as hooks for embedding and styling
+    //   svgoPlugins: [{cleanupIDs: false}]
+    // })))
+    .pipe(gulp.dest('.tmp/flags'))
+    .pipe(gulp.dest('dist/flags'));
+});
+
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
@@ -132,7 +146,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts', 'flags'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -149,7 +163,8 @@ gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], ()
     'app/includes/*.html',
     'app/images/**/*',
     '.tmp/fonts/**/*',
-    '.tmp/templates/**/*.js'
+    '.tmp/templates/**/*.js',
+    '.tmp/flags/**/*'
   ], ['preprocess']).on('change', reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);

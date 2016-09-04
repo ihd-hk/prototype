@@ -7,7 +7,9 @@
     "handlebars": "^4.0.5",
     "imagesloaded": "^4.1.0",
     "masonry": "^4.1.1",
-    "shufflejs": "^4.0.1"
+    "shufflejs": "^4.0.1",
+    "flag-css": "master",
+    "underscore": "^1.8.3"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -26,6 +28,11 @@
     "masonry": {
       "main": [
         "dist/masonry.pkgd.js"
+      ]
+    },
+    "flag-css": {
+      "main": [
+        "dist/scss/flag-css.scss"
       ]
     }
   },
