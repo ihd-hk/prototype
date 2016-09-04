@@ -3,16 +3,22 @@
 // });
 
 function setNavigation() {
-    var path = window.location.pathname;
-    path = path.replace(/\/$/, '');
-    path = decodeURIComponent(path);
+  var path = window.location.pathname;
+  path = path.replace(/\/$/, '');
+  path = decodeURIComponent(path);
 
-    $('.navbar .nav a').each(function () {
-        var href = $(this).attr('href');
-        if (path.substring(1, href.length+1) === href) {
-            $(this).closest('li').addClass('active');
-        }
-    });
+  var matches = 0;
+  $('.navbar .nav a').each(function () {
+    var href = $(this).attr('href');
+    if (path.indexOf(href) !== -1) {
+      $(this).closest('li').addClass('active');
+      matches++;
+    }
+  });
+
+  if (matches === 0) {
+    $('.navbar .nav li').first().addClass('active');
+  }
 }
 
 
