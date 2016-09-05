@@ -110,6 +110,7 @@ footer {
       margin-bottom: $quarter-grid-gutter-width;
       margin-left: -$quarter-grid-gutter-width;
       margin-right: -$quarter-grid-gutter-width;
+      overflow: hidden;
     }
 
     @media (min-width: $screen-xs-max) {
