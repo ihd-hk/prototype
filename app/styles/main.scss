@@ -117,35 +117,3 @@ footer {
     }
   }
 }
-
-#location_filter {
-  li {
-    position: static;
-
-    a.flag {
-      @extend .flag-3x;
-      width: 4.5em;
-      margin-right: 0.5em;
-
-      // Hide the text
-      display: inline-block;
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-
-      padding:0;
-      opacity: 0.5;
-      @include transition(opacity ease-in-out .15s);
-      &:hover {
-        opacity: 0.66;
-      }
-    }
-
-    &.active {
-      a.flag {
-        background-color: transparent;
-        opacity: 1;
-      }
-    }
-  }
-}

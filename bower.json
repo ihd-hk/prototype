@@ -3,11 +3,11 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
-    "modernizr": "~2.8.1",
+    "modernizr": "^3.0.0",
     "handlebars": "^4.0.5",
     "imagesloaded": "^4.1.0",
     "masonry": "^4.1.1",
-    "shufflejs": "^4.0.1",
+    "shufflejs": "^4.0.0",
     "underscore": "^1.8.3"
   },
   "overrides": {
