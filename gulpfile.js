@@ -29,7 +29,18 @@ gulp.task('styles', () => {
     .pipe(reload({stream: true}));
 });
 
-gulp.task('scripts', () => {
+gulp.task('json', () => {
+  return gulp.src('app/scripts/**/*.json')
+    .pipe(debug({title: 'debug-json'}))
+    // .pipe($.plumber())
+    // .pipe($.sourcemaps.init())
+    // .pipe($.babel())
+    // .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe(reload({stream: true}));
+});
+
+gulp.task('scripts', ['json'], () => {
   return gulp.src('app/scripts/**/*.js')
     .pipe(debug({title: 'debug-scripts'}))
     .pipe($.plumber())
@@ -111,20 +122,6 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('flags', () => {
-  return gulp.src('bower_components/flag-css/dist/flags/**/*')
-    .pipe(debug({title: 'debug-flags'}))
-    // .pipe($.cache($.imagemin({
-    //   progressive: true,
-    //   interlaced: true,
-    //   // don't remove IDs from SVGs, they are often used
-    //   // as hooks for embedding and styling
-    //   svgoPlugins: [{cleanupIDs: false}]
-    // })))
-    .pipe(gulp.dest('.tmp/flags'))
-    .pipe(gulp.dest('dist/flags'));
-});
-
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
@@ -146,7 +143,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts', 'flags'], () => {
+gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -163,8 +160,7 @@ gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts', 'fl
     'app/includes/*.html',
     'app/images/**/*',
     '.tmp/fonts/**/*',
-    '.tmp/templates/**/*.js',
-    '.tmp/flags/**/*'
+    '.tmp/templates/**/*.js'
   ], ['preprocess']).on('change', reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
