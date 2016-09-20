@@ -60,13 +60,13 @@
           selectedTypes = [];
 
       var v;
-      if (!!(v = $locationFilter.val()) && (v !== "-1")) {
+      if (!!(v = $locationFilter.val()) && (v !== '-1')) {
         selectedLocations.push(v);
       }
-      if (!!(v = $disciplineFilter.val()) && (v !== "-1")) {
+      if (!!(v = $disciplineFilter.val()) && (v !== '-1')) {
         selectedDisciplines.push(v);
       }
-      if (!!(v = $typeFilter.val()) && (v !== "-1")) {
+      if (!!(v = $typeFilter.val()) && (v !== '-1')) {
         selectedTypes.push(v);
       }
 
