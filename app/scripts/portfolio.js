@@ -15,7 +15,6 @@
       });
     };
 
-    console.log(kvMapper(data.countries));
     $locationFilter.select2({
       data: kvMapper(data.countries),
       placeholder: 'Country',
