@@ -164,6 +164,7 @@ gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], ()
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
+  gulp.watch('app/scripts/**/*.json', ['json']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('app/templates/**/*.hbs', ['templates']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);

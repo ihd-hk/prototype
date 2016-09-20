@@ -1,8 +1,13 @@
 <div class="portfolio-item" data-locations="{{serializedLocations}}" data-codes="{{serializedCodes}}" data-disciplines="{{serializedDisciplines}}">
-  <div class="inner">
-    <div class="info">
+  <div class="card">
+    {{#if files.length}}
+      <div class="image-container">
+        {{#each files}}<img src="images/portfolio/{{this}}" />{{/each}}
+      </div>
+    {{/if}}
+
+    <div class="card-content">
       <h2>{{title_en}}</h2>
-      <p>{{type}}</p>
       <p class="labels">
         {{#each locationNames}}
           <span class="label label-default">{{ this }}</span>

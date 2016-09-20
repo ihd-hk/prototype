@@ -2,7 +2,8 @@
 
 var XLSX = require('xlsx'),
     fs = require('fs'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    glob = require('glob');
 
 
 var args = process.argv.slice(2);
@@ -13,7 +14,7 @@ var worksheet = workbook.Sheets.WEBSITE;
 
 
 data = {
-  items: XLSX.utils.sheet_to_json(worksheet, { header: ['project', 'date', 'title_en', 'title_ch', 'disciplines', 'codes', 'city_en', 'city_ch', 'country_en', 'country_ch', 'hotel_en', 'hotel_ch'], range: 6 }),
+  items: XLSX.utils.sheet_to_json(worksheet, { header: ['project', 'date', 'title_en', 'title_ch', 'disciplines', 'codes', 'city_en', 'city_ch', 'country_en', 'country_ch', 'hotel_en', 'hotel_ch', 'desc_en', 'desc_ch'], range: 6 }),
   disciplines: {
     A: 'Audio-Visual',
     C: 'Acoustics',
@@ -52,12 +53,13 @@ data = {
 
 data.items = data.items.filter(function(item) { return (item.project !== "0") && !!(item.project); });
 
-data.items.forEach(function(item) {
-  if (!!(item.country_en)) {
+data.items.forEach(function(item, index, items) {
+  if ((item.country_en !== "0") && !!(item.country_en)) {
     data.countries[item.country_en] = item.country_en;
   }
+  items[index].files = glob.sync(item.project + '-*.jpg', {cwd: 'app/images/portfolio', nocase: true});
 });
-
+// data.countries = _.sortBy(data.countries);
 
 
 fs.writeFileSync('app/scripts/portfolio-data.json', JSON.stringify(data), 'utf-8');
