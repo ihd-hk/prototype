@@ -17,24 +17,18 @@
 
     $locationFilter.select2({
       data: kvMapper(data.countries),
-      // placeholder: 'Country',
       minimumResultsForSearch: Infinity,
-      // allowClear: true,
       theme: 'classic'
     });
 
     $disciplineFilter.select2({
       data: kvMapper(data.disciplines),
-      // placeholder: 'Discipline',
       minimumResultsForSearch: Infinity,
-      // allowClear: true,
       theme: 'classic'
     });
     $typeFilter.select2({
       data: kvMapper(data.codes),
-      // placeholder: 'Type',
       minimumResultsForSearch: Infinity,
-      // allowClear: true,
       theme: 'classic'
     });
 
@@ -75,7 +69,6 @@
       if (!!(v = $typeFilter.val()) && (v !== "-1")) {
         selectedTypes.push(v);
       }
-      console.log([selectedLocations, selectedDisciplines, selectedTypes]);
 
       if (selectedLocations.length + selectedDisciplines.length + selectedTypes.length > 0 ) {
         shuffle.filter(function(element) {
