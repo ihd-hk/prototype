@@ -32,11 +32,9 @@ gulp.task('styles', () => {
 gulp.task('json', () => {
   return gulp.src('app/scripts/**/*.json')
     .pipe(debug({title: 'debug-json'}))
-    // .pipe($.plumber())
-    // .pipe($.sourcemaps.init())
-    // .pipe($.babel())
-    // .pipe($.sourcemaps.write('.'))
+    .pipe($.plumber())
     .pipe(gulp.dest('.tmp/scripts'))
+    .pipe(gulp.dest('dist/scripts'))
     .pipe(reload({stream: true}));
 });
 
@@ -104,6 +102,7 @@ gulp.task('html', ['preprocess', 'templates', 'styles', 'scripts'], () => {
     .pipe($.preprocess())
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.json', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
