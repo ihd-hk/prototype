@@ -34,18 +34,15 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Portfolio</h1>
-          <div id="location_filter" class="portfolio-filter">
-            <ul class="nav nav-pills"><p class="navbar-text">Location:</p></ul>
-          </div>
-          <div id="type_filter" class="portfolio-filter">
-            <ul class="nav nav-pills"><p class="navbar-text">Type:</p></ul>
-          </div>
-          <div id="discipline_filter" class="portfolio-filter">
-            <ul class="nav nav-pills"><p class="navbar-text">Discipline:</p></ul>
-          </div>
+          <form id="portfolio_filters">
+            <div class="row">
+              <div class="col-md-4"><select name="location"   class="form-control input-lg"><option></option></select></div>
+              <div class="col-md-4"><select name="type"       class="form-control input-lg"><option></option></select></div>
+              <div class="col-md-4"><select name="discipline" class="form-control input-lg"><option></option></select></div>
+            </div>
+          </form>
 
-          <div id="porfolio_grid">
-          </div>
+          <div id="porfolio_grid"></div>
         </div>
       </div>
     </div>
@@ -56,9 +53,8 @@
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/handlebars/handlebars.js"></script>
-    <script src="/bower_components/ev-emitter/ev-emitter.js"></script>
-    <script src="/bower_components/imagesloaded/imagesloaded.js"></script>
     <script src="/bower_components/get-size/get-size.js"></script>
+    <script src="/bower_components/ev-emitter/ev-emitter.js"></script>
     <script src="/bower_components/desandro-matches-selector/matches-selector.js"></script>
     <script src="/bower_components/fizzy-ui-utils/utils.js"></script>
     <script src="/bower_components/outlayer/item.js"></script>
@@ -66,6 +62,7 @@
     <script src="/bower_components/masonry/dist/masonry.pkgd.js"></script>
     <script src="/bower_components/shufflejs/dist/shuffle.js"></script>
     <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/select2/dist/js/select2.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

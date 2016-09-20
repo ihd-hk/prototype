@@ -32,6 +32,7 @@ $nav-pills-border-radius: 0;
 
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/select2/src/scss/core.scss";
 // endbower
 
 
@@ -114,6 +115,10 @@ footer {
 
     @media (min-width: $screen-xs-max) {
       p { display: block; }
+    }
+
+    p.labels {
+      text-align: right;
     }
   }
 }

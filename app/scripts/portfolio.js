@@ -1,38 +1,46 @@
 (function ($, Shuffle) {
   'use strict';
   var $list = $('#porfolio_grid'),
-    $locationFilter = $('#location_filter ul'),
-    $disciplineFilter = $('#discipline_filter ul'),
-    $typeFilter = $('#type_filter ul');
+    $locationFilter = $('#portfolio_filters select[name="location"]'),
+    $disciplineFilter = $('#portfolio_filters select[name="discipline"]'),
+    $typeFilter = $('#portfolio_filters select[name="type"]');
+
+
 
   $.getJSON('scripts/portfolio-data.json', function(data) {
     // @TODO - figure out how to deal with the Chinese side of this.
+    var kvMapper = function(object) {
+      return Object.keys(object).map(function(key) {
+        return { id: key, text: object[key] };
+      });
+    };
 
-    var code;
-    for (code in data.disciplines) {
-      $disciplineFilter.append(IHD.templates.type_filter_button({
-        type_code: code,
-        type_name: data.disciplines[code]
-      }));
-    }
+    console.log(kvMapper(data.countries));
+    $locationFilter.select2({
+      data: kvMapper(data.countries),
+      placeholder: 'Country',
+      minimumResultsForSearch: Infinity,
+      allowClear: true,
+      theme: 'classic'
+    });
 
-    for (code in data.codes) {
-      $typeFilter.append(IHD.templates.type_filter_button({
-        type_code: code,
-        type_name: data.codes[code]
-      }));
-    }
+    $disciplineFilter.select2({
+      data: kvMapper(data.disciplines),
+      placeholder: 'Discipline',
+      minimumResultsForSearch: Infinity,
+      allowClear: true,
+      theme: 'classic'
+    });
+    $typeFilter.select2({
+      data: kvMapper(data.codes),
+      placeholder: 'Type',
+      minimumResultsForSearch: Infinity,
+      allowClear: true,
+      theme: 'classic'
+    });
 
     var locations = [];
     $.each(data.items, function (i, portfolio) {
-      if ($.inArray(portfolio.country_en, locations) === -1) {
-        locations.push(portfolio.country_en);
-        $locationFilter.append(IHD.templates.type_filter_button({
-          type_code: portfolio.country_en,
-          type_name: portfolio.country_en
-        }));
-      }
-
       portfolio.serializedLocations = JSON.stringify([portfolio.country_en]);
       portfolio.locationNames = [portfolio.country_en];
 
@@ -48,40 +56,33 @@
       $list.append(IHD.templates.portfolio(portfolio));
 
     });
-    $locationFilter.find('[data-toggle="tooltip"]').tooltip();
-
-
-
-    var shuffle;
-    var $images = $list.find('img');
-    var imgLoad = new imagesLoaded($images.get()); //eslint-disable-line new-cap
-    imgLoad.on('always', function () {
-      shuffle = new Shuffle($list[0], {
-        itemSelector: '.portfolio-item'
-      });
+    var shuffle = new Shuffle($list[0], {
+      itemSelector: '.portfolio-item'
     });
 
+
     var updateFilter = function() {
-      var selectedLocation = [],
-          selectedDiscipline = [],
+      var selectedLocations = [],
+          selectedDisciplines = [],
           selectedTypes = [];
 
-      $locationFilter.find('li.active').each(function(i, el) {
-        selectedLocation.push(el.getAttribute('data-type'));
-      });
-      $disciplineFilter.find('li.active').each(function(i, el) {
-        selectedDiscipline.push(el.getAttribute('data-type'));
-      });
-      $typeFilter.find('li.active').each(function(i, el) {
-        selectedTypes.push(el.getAttribute('data-type'));
-      });
+      var v;
+      if (!!(v = $locationFilter.val())) {
+        selectedLocations.push(v);
+      }
+      if (!!(v = $disciplineFilter.val())) {
+        selectedDisciplines.push(v);
+      }
+      if (!!(v = $typeFilter.val())) {
+        selectedTypes.push(v);
+      }
 
-      if (selectedLocation.length + selectedTypes.length + selectedDiscipline.length > 0 ) {
+      if (selectedLocations.length + selectedDisciplines.length + selectedTypes.length > 0 ) {
         shuffle.filter(function(element) {
           var $el = $(element);
-          return (selectedLocation   === null ||  _.intersection($el.data('locations'  ), selectedLocation  ).length === selectedLocation.length) &&
-                 (selectedDiscipline === null ||  _.intersection($el.data('disciplines'), selectedDiscipline).length === selectedDiscipline.length) &&
-                 (selectedTypes      === null ||  _.intersection($el.data('codes'      ), selectedTypes     ).length === selectedTypes.length);
+          return (selectedLocations   === null ||  _.intersection($el.data('locations'  ), selectedLocations  ).length === selectedLocations.length) &&
+                 (selectedDisciplines === null ||  _.intersection($el.data('disciplines'), selectedDisciplines).length === selectedDisciplines.length) &&
+                 (selectedTypes       === null ||  _.intersection($el.data('codes'      ), selectedTypes      ).length === selectedTypes.length);
         });
       }
       else {
@@ -89,14 +90,7 @@
       }
     };
 
-
-    $('.portfolio-filter').on('click', 'a', function(event) {
-      var $clickedLink = $(event.currentTarget);
-      var $parentLi = $clickedLink.parent('li');
-      $parentLi.toggleClass('active').siblings('li').removeClass('active');
-
-      updateFilter();
-    });
+    $('#portfolio_filters ').on('change', 'select', updateFilter);
   });
 
 })(jQuery, window.shuffle);

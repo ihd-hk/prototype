@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var XLSX = require('xlsx'),
-    fs = require('fs');
+    fs = require('fs'),
+    _ = require('underscore');
 
 
 var args = process.argv.slice(2);
@@ -22,7 +23,7 @@ data = {
     S: 'Security',
     T: 'PABX/Tel',
     F: 'Future #1',
-    Y: 'Future #2'
+    Y: 'Future #2',
   },
   codes: {
     H: 'Hotel',
@@ -45,7 +46,18 @@ data = {
     T: 'Theme Park',
     V: 'Villa',
     W: 'Worship',
-  }
+  },
+  countries: {},
 };
+
+data.items = data.items.filter(function(item) { return (item.project !== "0") && !!(item.project); });
+
+data.items.forEach(function(item) {
+  if (!!(item.country_en)) {
+    data.countries[item.country_en] = item.country_en;
+  }
+});
+
+
 
 fs.writeFileSync('app/scripts/portfolio-data.json', JSON.stringify(data), 'utf-8');
