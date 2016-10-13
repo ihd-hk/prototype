@@ -113,6 +113,19 @@ footer {
     p.labels {
       text-align: right;
       margin: 0;
+      font-size:0;
+      line-height: 0;
+      span.label {
+        font-size: 12px;
+        line-height: 2em;
+        margin-left: 0.2em;
+        font-weight: lighter;
+        padding: 0.2em 0.4em;
+        color: #333;
+      }
+      span.label-location   { background-color: hsl(210, 100%, 80%); }
+      span.label-code       { background-color: hsl(60,  100%, 80%); }
+      span.label-discipline { background-color: hsl(21,  100%, 80%); }
     }
 
     .image-container {
