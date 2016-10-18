@@ -51,7 +51,12 @@ data = {
   countries: {},
 };
 
-data.items = data.items.filter(function(item) { return (item.project !== "0") && !!(item.project); });
+data.items = data.items.filter(function(item) {
+  return (item.project !== "0") && !!(item.project);
+});
+data.items = data.items.sort(function(a, b) {
+  return (a.title_en > b.title_en) ? 1 : ((b.title_en > a.title_en) ? -1 : 0);
+});
 
 data.items.forEach(function(item, index, items) {
   if ((item.country_en !== "0") && !!(item.country_en)) {
