@@ -90,7 +90,7 @@ gulp.task('templates', () => {
 gulp.task('preprocess', () => {
   return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
           .pipe(debug({title: 'debug-preprocess'}))
-          .pipe($.preprocess())
+          .pipe($.preprocess({includeBase: 'app/includes'}))
           .pipe(gulp.dest('.tmp/'))
           .pipe(reload({stream: true}));
 
@@ -99,7 +99,6 @@ gulp.task('preprocess', () => {
 gulp.task('html', ['preprocess', 'templates', 'styles', 'scripts'], () => {
   return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
     .pipe(debug({title: 'debug-html'}))
-    .pipe($.preprocess())
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.json', $.uglify()))

@@ -1,4 +1,4 @@
-(function ($, Shuffle, portfolio_base_path) {
+(function ($, Shuffle, portfolio_conf) {
   'use strict';
   var $list = $('#porfolio_grid'),
     $locationFilter = $('#portfolio_filters select[name="location"]'),
@@ -7,11 +7,11 @@
 
 
 
-  $.getJSON(portfolio_base_path + 'scripts/portfolio-data.json', function(data) {
+  $.getJSON(portfolio_conf.base_path + 'scripts/portfolio-data.json', function(data) {
     // @TODO - figure out how to deal with the Chinese side of this.
     var kvMapper = function(object) {
       return Object.keys(object).map(function(key) {
-        return { id: key, text: object[key] };
+        return { id: key, text: object[key][portfolio_conf.lang] };
       });
     };
 
@@ -34,20 +34,26 @@
 
     var locations = [];
     $.each(data.items, function (i, portfolio) {
-      portfolio.portfolio_base_path = portfolio_base_path;
-      portfolio.serializedLocations = JSON.stringify([portfolio.country_en]);
-      portfolio.locationNames = [portfolio.country_en];
-
       var disciplines = (portfolio.disciplines === undefined) ? [] : portfolio.disciplines.split('');
-
-      portfolio.serializedDisciplines = JSON.stringify(disciplines);
-      portfolio.disciplineNames = disciplines.map(function(code) { return data.disciplines[code]; });
-
       var codes = (portfolio.codes === undefined) ? [] : portfolio.codes.split('');
-      portfolio.serializedCodes = JSON.stringify(codes);
-      portfolio.codeNames = codes.map(function(code) { return data.codes[code]; });
 
-      $list.append(IHD.templates.portfolio(portfolio));
+      var portfolio_data = {
+        portfolio_base_path : portfolio_conf.base_path,
+        serializedLocations : JSON.stringify([portfolio.country_en]),
+        locationNames : [portfolio['country_' + portfolio_conf.lang]],
+
+        serializedDisciplines : JSON.stringify(disciplines),
+        disciplineNames : disciplines.map(function(code) { return data.disciplines[code][portfolio_conf.lang]; }),
+
+        serializedCodes : JSON.stringify(codes),
+        codeNames : codes.map(function(code) { return data.codes[code][portfolio_conf.lang]; }),
+
+        files: portfolio.files,
+        title: portfolio['title_' + portfolio_conf.lang]
+      };
+
+      $list.append(IHD.templates.portfolio(portfolio_data));
+
 
     });
     var shuffle = new Shuffle($list[0], {
@@ -87,4 +93,4 @@
     $('#portfolio_filters ').on('change', 'select', updateFilter);
   });
 
-})(jQuery, window.shuffle, portfolio_base_path);
+})(jQuery, window.shuffle, portfolio_conf);
