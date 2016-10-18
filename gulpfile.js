@@ -87,16 +87,8 @@ gulp.task('templates', () => {
     .pipe(gulp.dest('.tmp/templates'));
 });
 
-gulp.task('preprocess', () => {
-  return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
-          .pipe(debug({title: 'debug-preprocess'}))
-          .pipe($.preprocess({includeBase: 'app/includes'}))
-          .pipe(gulp.dest('.tmp/'))
-          .pipe(reload({stream: true}));
 
-});
-
-gulp.task('html', ['preprocess', 'templates', 'styles', 'scripts'], () => {
+gulp.task('html', ['templates', 'styles', 'scripts'], () => {
   return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
     .pipe(debug({title: 'debug-html'}))
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
@@ -142,7 +134,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['templates', 'styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -161,7 +153,7 @@ gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], ()
     'app/images/**/*',
     '.tmp/fonts/**/*',
     '.tmp/templates/**/*.js'
-  ], ['preprocess']).on('change', reload);
+  ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
