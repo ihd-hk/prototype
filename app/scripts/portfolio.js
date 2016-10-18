@@ -1,4 +1,4 @@
-(function ($, Shuffle) {
+(function ($, Shuffle, portfolio_base_path) {
   'use strict';
   var $list = $('#porfolio_grid'),
     $locationFilter = $('#portfolio_filters select[name="location"]'),
@@ -7,7 +7,7 @@
 
 
 
-  $.getJSON('scripts/portfolio-data.json', function(data) {
+  $.getJSON(portfolio_base_path + 'scripts/portfolio-data.json', function(data) {
     // @TODO - figure out how to deal with the Chinese side of this.
     var kvMapper = function(object) {
       return Object.keys(object).map(function(key) {
@@ -34,6 +34,7 @@
 
     var locations = [];
     $.each(data.items, function (i, portfolio) {
+      portfolio.portfolio_base_path = portfolio_base_path;
       portfolio.serializedLocations = JSON.stringify([portfolio.country_en]);
       portfolio.locationNames = [portfolio.country_en];
 
@@ -86,4 +87,4 @@
     $('#portfolio_filters ').on('change', 'select', updateFilter);
   });
 
-})(jQuery, window.shuffle);
+})(jQuery, window.shuffle, portfolio_base_path);

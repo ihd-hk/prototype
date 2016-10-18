@@ -84,6 +84,14 @@ footer {
   }
 }
 
+#contact_page {
+  @media (max-width: $dl-horizontal-breakpoint - 1) {
+    dd {
+      margin-bottom: $line-height-computed;
+    }
+  }
+}
+
 #porfolio_grid {
   .portfolio-item {
     @extend .col-md-3;

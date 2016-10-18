@@ -88,7 +88,7 @@ gulp.task('templates', () => {
 });
 
 gulp.task('preprocess', () => {
-  return gulp.src('app/*.html')
+  return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
           .pipe(debug({title: 'debug-preprocess'}))
           .pipe($.preprocess())
           .pipe(gulp.dest('.tmp/'))
@@ -97,7 +97,7 @@ gulp.task('preprocess', () => {
 });
 
 gulp.task('html', ['preprocess', 'templates', 'styles', 'scripts'], () => {
-  return gulp.src('app/*.html')
+  return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
     .pipe(debug({title: 'debug-html'}))
     .pipe($.preprocess())
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
@@ -132,7 +132,8 @@ gulp.task('fonts', () => {
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
-    '!app/*.html'
+    '!app/*.html',
+    '!app/ch/*.html'
   ], {
     dot: true
   })
@@ -156,6 +157,7 @@ gulp.task('serve', ['preprocess', 'templates', 'styles', 'scripts', 'fonts'], ()
 
   gulp.watch([
     'app/*.html',
+    'app/ch/*.html',
     'app/includes/*.html',
     'app/images/**/*',
     '.tmp/fonts/**/*',
@@ -207,7 +209,7 @@ gulp.task('wiredep', () => {
     }))
     .pipe(gulp.dest('app/styles'));
 
-  gulp.src('app/*.html')
+  gulp.src(['app/*.html', 'app/ch/*.html'])
     .pipe(wiredep({
       exclude: ['bootstrap-sass'],
       ignorePath: /^(\.\.\/)*\.\./

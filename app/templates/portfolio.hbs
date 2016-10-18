@@ -2,7 +2,7 @@
   <div class="card">
     {{#if files.length}}
       <div class="image-container">
-        {{#each files}}<img src="images/portfolio/{{this}}" />{{/each}}
+        {{#each files}}<img src="{{../portfolio_base_path}}images/portfolio/{{this}}" />{{/each}}
       </div>
     {{/if}}
 
