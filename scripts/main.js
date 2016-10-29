@@ -1,1 +1,1 @@
-"use strict";function setNavigation(){var a=window.location.pathname;a=a.replace(/\/$/,""),a=decodeURIComponent(a);var e=0;$(".navbar .nav a").each(function(){var t=$(this).attr("href");a.indexOf(t)!==-1&&($(this).closest("li").addClass("active"),e++)}),0===e&&$(".navbar .nav li").first().addClass("active")}!function(a){setNavigation(),a("#carousel-homepage").carousel()}(jQuery);
+"use strict";!function(e){e("#carousel-homepage").carousel()}(jQuery);
