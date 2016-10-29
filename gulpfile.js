@@ -91,7 +91,7 @@ gulp.task('templates', () => {
 gulp.task('html', ['templates', 'styles', 'scripts'], () => {
   return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
     .pipe(debug({title: 'debug-html'}))
-    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+    .pipe($.useref({searchPath: ['.tmp', '.tmp/ch', 'app']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.json', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
@@ -163,7 +163,7 @@ gulp.task('serve', ['templates', 'styles', 'scripts', 'fonts'], () => {
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
-gulp.task('serve:dist', () => {
+gulp.task('serve:dist', ['build'], () => {
   browserSync({
     notify: false,
     port: 9000,
