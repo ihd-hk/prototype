@@ -89,9 +89,9 @@ gulp.task('templates', () => {
 
 
 gulp.task('html', ['templates', 'styles', 'scripts'], () => {
-  return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "."})
+  return gulp.src(['app/*.html', 'app/ch/*.html'], {base: "app/"})
     .pipe(debug({title: 'debug-html'}))
-    .pipe($.useref({searchPath: ['.tmp', '.tmp/ch', 'app']}))
+    .pipe($.useref({searchPath: ['.tmp', '.tmp/ch', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.json', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
