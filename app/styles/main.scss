@@ -172,3 +172,24 @@ footer {
     }
   }
 }
+
+.row {
+  &.copyright {
+    margin: 2em 0 0;
+  }
+  &.our-values {
+    div {
+      img {
+        width: 3em;
+        height: 3em;
+        margin-right: 0.5em;
+      }
+      p {
+        margin: 0;
+        font-size: 0.8em;
+        line-height: 1.25em;
+        @extend .text-center;
+      }
+    }
+  }
+}
