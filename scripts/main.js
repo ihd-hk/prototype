@@ -1,1 +1,1 @@
-"use strict";!function(e){e("#carousel-homepage").carousel()}(jQuery);
+"use strict";!function(o){o("#carousel-homepage").carousel(),o('[data-toggle="tooltip"]').tooltip()}(jQuery);
