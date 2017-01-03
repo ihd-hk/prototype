@@ -65,12 +65,11 @@ footer {
 .nav {
   .flag {
     a {
-      padding-top: 1px;
-      padding-bottom: 1px;
+      padding:0;
       img {
         display: block;
-        width: 48px;
-        height: 48px;
+        width: auto;
+        height: 50px;
       }
     }
   }
