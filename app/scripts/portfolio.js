@@ -5,7 +5,7 @@
     $disciplineFilter = $('#portfolio_filters select[name="discipline"]'),
     $typeFilter = $('#portfolio_filters select[name="type"]');
 
-  $("#portfolio_filters").sticky({topSpacing: 50});
+  $('#portfolio_filters').sticky({topSpacing: 50});
 
 
 

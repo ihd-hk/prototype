@@ -135,12 +135,10 @@ footer {
         line-height: 2em;
         margin-left: 0.2em;
         font-weight: lighter;
-        padding: 0.2em 0.4em;
-        color: #333;
+        padding: 0.25em 0.6em;
+        color: #808080;
+        background-color: rgba(0,0,0, 0.06);
       }
-      span.label-location   { background-color: hsl(210, 100%, 80%); }
-      span.label-code       { background-color: hsl(60,  100%, 80%); }
-      span.label-discipline { background-color: hsl(21,  100%, 80%); }
     }
 
     .image-container {
