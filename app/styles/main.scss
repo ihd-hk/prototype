@@ -109,14 +109,15 @@ footer {
       width: 100%;
     }
     h2 {
-      font-size: $font-size-h4;
+      font-size: $font-size-h5;
       text-align: center;
       font-weight: normal;
       margin:0 0 1em 0;
     }
 
     .card {
-      background: $gray-lighter;
+      background: #fafafa;
+      border: 1px solid $gray-lighter;
       margin-top: $grid-gutter-width / 2;
       margin-bottom: $grid-gutter-width / 2;
       overflow: hidden;
