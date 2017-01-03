@@ -5,6 +5,8 @@
     $disciplineFilter = $('#portfolio_filters select[name="discipline"]'),
     $typeFilter = $('#portfolio_filters select[name="type"]');
 
+  $("#portfolio_filters").sticky({topSpacing: 50});
+
 
 
   $.getJSON(portfolio_conf.base_path + 'scripts/portfolio-data.json', function(data) {

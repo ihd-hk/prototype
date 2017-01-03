@@ -91,7 +91,14 @@ footer {
     }
   }
 }
-
+#portfolio_filters-sticky-wrapper {
+  z-index: 100;
+  position: relative;
+}
+#portfolio_filters {
+  background: rgba(255,255,255, 0.9);
+  padding: 10px 0;
+}
 #porfolio_grid {
   .portfolio-item {
     @extend .col-md-3;

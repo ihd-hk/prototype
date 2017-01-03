@@ -66,15 +66,17 @@
         <div class="row">
           <div class="col-md-12">
             <h1>Portfolio</h1>
-            <form id="portfolio_filters" class="row">
-              <div class="col-md-4"><select name="location"   class="form-control input-lg"><option value="-1">All Countries</option></select></div>
-              <div class="col-md-4"><select name="type"       class="form-control input-lg"><option value="-1">All Types</option></select></div>
-              <div class="col-md-4"><select name="discipline" class="form-control input-lg"><option value="-1">All Disciplines</option></select></div>
+            <form id="portfolio_filters">
+              <div class="row">
+                <div class="col-md-4"><select name="location"   class="form-control input-lg"><option value="-1">All Countries</option></select></div>
+                <div class="col-md-4"><select name="type"       class="form-control input-lg"><option value="-1">All Types</option></select></div>
+                <div class="col-md-4"><select name="discipline" class="form-control input-lg"><option value="-1">All Disciplines</option></select></div>
+              </div>
             </form>
-
-            <div id="porfolio_grid" class="row"></div>
           </div>
         </div>
+
+        <div id="porfolio_grid" class="row"></div>
       </div>
     </div> <!-- closing #page -->
 
@@ -128,6 +130,7 @@
 
     <script>var portfolio_conf = { base_path: '', lang: 'en' }</script>
     <!-- build:js scripts/portfolio.js -->
+    <script src="/bower_components/jquery-sticky/jquery.sticky.js"></script>
     <script src="templates/portfolio.js"></script>
     <script src="templates/portfolio_filter_button.js"></script>
     <script src="templates/type_filter_button.js"></script>

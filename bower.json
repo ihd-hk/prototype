@@ -8,7 +8,8 @@
     "masonry": "^4.1.1",
     "shufflejs": "^4.0.0",
     "underscore": "^1.8.3",
-    "select2": "select2-ng#^4.0.3"
+    "select2": "select2-ng#^4.0.3",
+    "jquery-sticky": "^1.0.3"
   },
   "overrides": {
     "bootstrap-sass": {
