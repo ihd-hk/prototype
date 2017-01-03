@@ -164,7 +164,9 @@ footer {
 
 .row {
   &.copyright {
-    margin: 2em 0 0;
+    margin: 1em 0 0;
+    color: lighten($footer-background, 25%);
+    @extend .small;
   }
   &.our-values {
     div {
