@@ -4,29 +4,19 @@ $icon-font-path: '../fonts/';
 $component-offset-horizontal: 120px;
 $body-bg: #fff;
 $font-size-base: 16px;
+$font-size-small: 12px;
 $grid-gutter-width: 20px;
 
 $brand-primary: rgb(255,90,1);
 
-// $navbar-default-link-color:                #777 !default;
-// $navbar-default-link-hover-color:          #333 !default;
-// $navbar-default-link-hover-bg:             rgba($brand-primary, 0.25);
 $navbar-default-link-hover-bg:             lighten($brand-primary, 33.333%);
 $navbar-default-link-active-color:         #f0f0f0;
 $navbar-default-link-active-bg:            $brand-primary;
-// $navbar-default-link-disabled-color:       #ccc !default;
-// $navbar-default-link-disabled-bg:          transparent !default;
 
 $navbar-default-bg: rgba(#f0f0f0, 0.95);
 $navbar-default-border: darken($navbar-default-bg, 6.5%);
 
 $nav-pills-border-radius: 0;
-
-
-// $tooltip-bg: rgba($brand-primary, 0.9);
-// $tooltip-bg: $gray-dark;
-// $tooltip-arrow-color: $tooltip-bg;
-// $tooltip-color: $gray-lighter;
 
 
 // bower:scss
